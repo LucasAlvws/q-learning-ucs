@@ -27,8 +27,11 @@ class QLearningAgent:
     
     def learn(self, state, action, reward, next_state, next_valid_actions):
         max_next_q = max([self.get_q(next_state, a) for a in next_valid_actions]) if next_valid_actions else 0
-        current_q = self.get_q(state, action)
-        new_q = current_q + self.alpha * (reward + self.gamma * max_next_q - current_q)
+        # current_q = self.get_q(state, action)
+        # new_q = current_q + self.alpha * (reward + self.gamma * max_next_q - current_q) não sei qual usar?
+        #  https://www.geeksforgeeks.org/q-learning-in-python/
+        new_q = reward + self.gamma * max_next_q
+
         self.set_q(state, action, new_q)
     
     def get_policy(self, state, valid_actions):
